@@ -38,3 +38,25 @@ const dispCat = () => {
     }
 
 }
+
+//delete
+
+const delData = (id) => {
+
+    let allData = JSON.parse(localStorage.getItem('CatInfo'));
+    allData.splice(id - 1, 1)
+    j = 1;
+    allData.map((i) => {
+
+        i.id = j++;;
+    })
+    localStorage.setItem('CatInfo', JSON.stringify(allData))
+    dispCat();
+
+
+}
+
+dispCat();
+
+
+
