@@ -1,40 +1,33 @@
-const arr = [];
+let arr = [];
 
 //perform in op
-const addData = () => {
+let addData = () => {
     let allData = JSON.parse(localStorage.getItem("CatInfo"));
-
-    const name = document.catfrm.catname.value;
-    const catid = document.catfrm.catid.value;
-
-    const catData = {
-        id: catid,
-        name: name
-    };
+    let name = document.catfrm.catname.value;
+    let catid = document.catfrm.catid.value;
+    let catData = {};
 
     if (catid != '') {
         // Update
         allData.map((i) => {
-            if (i.id == catid) {
+            if (i.id == catid)
                 i.name = name;
-            }
-
         });
 
         localStorage.setItem("CatInfo", JSON.stringify(allData));
     } else {
         // Insert
-        if (allData = null) {
+        if (allData != null) {
             catData = {
-                id: allData.length + 1,
-                name: name
+                "id": allData.length + 1,
+                "name": name
             }
             arr = allData;
         } else {
             //new arr push
             catData = {
-                id: 1,
-                name: name
+                "id": 1,
+                "name": name
             }
         }
         arr.push(catData);
@@ -42,7 +35,7 @@ const addData = () => {
     }
 
     // Clear form inputs
-    document.catfrm.catname.value = '';
+    document.catfrm.name.value = '';
     document.catfrm.catid.value = '';
 
     // Call dispCat function
@@ -52,7 +45,7 @@ const addData = () => {
 
 
 // Display category
-const dispCat = () => {
+let dispCat = () => {
     //  allCatData
     let tr = '';
 
@@ -61,15 +54,11 @@ const dispCat = () => {
         allData.map((i) => {
             tr += `<tr>
                      <td>${i.id}</td> 
-                     <td> ${i.catname} </td> 
-                     
-                     
-                      <td><a href ="#" class="btn btn-danger" onclick="delData(${i.id})">Delete</a></td>
-                    
-            </tr>`;
+                     <td> ${i.name} </td> 
+                     <td><a href ="#" class="btn btn-danger" onclick="delData(${i.id})">Delete</a></td>
+                     </tr>`;
 
         })
-
         document.getElementById("allCatData").innerHTML = tr;
 
     }
@@ -78,23 +67,24 @@ const dispCat = () => {
 
 
 
+
+
+
+
 //delete
-const delData = (id) => {
+let delData = (id) => {
 
     let allData = JSON.parse(localStorage.getItem('CatInfo'));
     allData.splice(id - 1, 1)
     j = 1;
     allData.map((i) => {
 
-        i.id = j++;;
+        i.id = j++;
     })
     localStorage.setItem('CatInfo', JSON.stringify(allData))
     dispCat();
-
-
 }
 
-dispCat();
 
 
 
